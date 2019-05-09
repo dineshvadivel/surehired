@@ -8,7 +8,7 @@ const pdfToTextService = require('../service/pdfToText.service');
 AWS.config.update({
     accessKeyId: process.env.AWS_ACCESS_KEY,
     secretAccessKey: process.env.AWS_SECRET_KEY,
-    region: "ap-southeast-1"
+    region: "us-east-1"
 });
 
 var s3 = new AWS.S3();
@@ -27,7 +27,7 @@ module.exports = {
             var directory = req.body.category || "default"
 
             const params = {
-                Bucket: "surehired/" + userId + "/" + documentType,
+                Bucket: "sure-hired/" + userId + "/" + documentType,
                 Key: `${image_name}`,
                 ACL: 'public-read',
                 Body: image,

@@ -12,21 +12,47 @@ const jobsController = {
     },
 
     get: function (req, res, next) {
-        res.send("get detail")
+        jobService.getJobs(req.query).then(response => {
+            res.send(response);
+        }).catch(e => {
+            res.send(e);
+        })
     },
 
     patch: function (req, res, next) {
+        const jobId = req.params.jobId
+        var payload;
+        if ('socialMedia' in req.body) {
+            payload = {
+                $push: {
+                    socialMedia: req.body.socialMedia
+                }
+            };
+        } else {
+            payload = req.body;
+        }
 
+        jobService.patch(jobId, payload).then(response => {
+            res.send(response);
+        }).catch(e => {
+            res.send(e);
+        })
     },
 
     delete: function (req, res, next) {
-
+        jobService.deleteData({
+            jobId: req.params.jobId
+        }).then(response => {
+            res.send(response);
+        }).catch(e => {
+            res.send(e);
+        })
     },
-    testQueue: function (req, res, next) {
-        queueService.sendMsg(JSON.stringify({
-            type: "TEST",
-            jobId: '1'
-        })).then(response => {
+
+    startAnalytics: function (req, res, next) {
+        const payload = req.body;
+        payload.type = "START"
+        queueService.sendMsg(JSON.stringify(payload)).then(response => {
             res.send(response);
         }).catch(e => {
             res.send(e);

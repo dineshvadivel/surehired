@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import Router from 'next/router'
 
 class SignUpForm extends React.Component {
   constructor(props) {
@@ -19,11 +20,10 @@ class SignUpForm extends React.Component {
     });
   }
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault();
-    console.log(this.state);
 
-    fetch('/api/v1/auth/register', {
+    const response = await fetch('/api/v1/auth/register', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -31,6 +31,9 @@ class SignUpForm extends React.Component {
       },
       body: JSON.stringify(this.state)
     });
+
+    alert("Your sign up was successful!");
+    Router.push('/login');
   }
 
   render() {

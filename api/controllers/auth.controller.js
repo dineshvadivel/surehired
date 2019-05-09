@@ -40,6 +40,13 @@ const authController = {
         })
     },
 
+    facebookLogin: function (req, res, next) {
+        authService.facebookLogin(req.body).then(response => {
+            res.send(response);
+        }).catch(e => {
+            res.send(e);
+        });
+    }
 }
 
 module.exports = authController;

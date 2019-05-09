@@ -5,9 +5,11 @@ const request = require('request');
 const crawler = require('crawler-request');
 
 module.exports.convertToText = function (url) {
-    crawler(url).then(function (response) {
-        // handle response
-        console.log(response.text.length);
-        console.log(response.text);
-    });
+    return new Promise((resolve, reject) => {
+        crawler(url).then(res => {
+            resolve(res);
+        }).catch(e => {
+            reject(e);
+        });
+    })
 }

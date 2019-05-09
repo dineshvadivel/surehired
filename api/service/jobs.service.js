@@ -15,24 +15,45 @@ module.exports.createJob = function (data) {
     });
 }
 
-// var patchData = function (merchantId, data) {
-//     return new Promise(function (resolve, reject) {
-//         var query = {'merchantId':  merchantId };
-//         Merchant.updateDoc(query, data).then(updateResponse => {
-//             resolve(updateResponse)
-//         }).catch(e => {
-//             reject(e)
-//         })
-//     })
-// }
+module.exports.patch = function (jobId, data) {
+    return new Promise(function (resolve, reject) {
+        var query = { 'jobId': jobId };
+        UserJob.updateDoc(query, data).then(updateResponse => {
+            resolve(updateResponse)
+        }).catch(e => {
+            reject(e)
+        })
+    })
+}
 
-// var deleteData = function (merchantId, data) {
-//     return new Promise(function (resolve, reject) {
-//         var query = {'merchantId': merchantId  };
-//         Merchant.remove(query).then(response => {
-//             resolve(response)
-//         }).catch(e => {
-//             reject(e)
-//         })
-//     })
-// }
+module.exports.get = function (query) {
+    return new Promise((resolve, reject) => {
+        UserJob.list(query).then(res => {
+            console.log(res);
+            resolve(res)
+        }).catch(e => {
+            reject(e)
+        });
+    });
+}
+
+module.exports.getJobs = function (query) {
+    return new Promise((resolve, reject) => {
+        UserJob.list(query).then(res => {
+            console.log(res);
+            resolve(res)
+        }).catch(e => {
+            reject(e)
+        });
+    });
+}
+
+module.exports.deleteData = function (query, data) {
+    return new Promise(function (resolve, reject) {
+        UserJob.remove(query).then(response => {
+            resolve(response)
+        }).catch(e => {
+            reject(e)
+        })
+    })
+}

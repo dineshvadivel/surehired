@@ -41,7 +41,7 @@ h6 {
 
 .hero {
     align-items: center;
-    background-image: url('../images/cover.jpg');
+    background-image: url('../images/bg-images/cover.jpg');
     background-size: cover;
     color: #000;
     display: flex;
@@ -59,11 +59,59 @@ h6 {
     transition: background 0.5s linear;
 }
 
+.step-one {
+    background-image: url('../images/bg-images/bg4.jpg') !important;
+}
+
+.step-two {
+    background-image: url('../images/bg-images/bg1.jpg') !important;
+}
+
+.step-three {
+    background-image: url('../images/bg-images/bg2.jpg') !important;
+}
+
+.step-four {
+    background-image: url('../images/bg-images/bg3.jpg') !important;
+}
+
+
 .app-hero {
     align-items: center;
-    background-image: url('../images/bg.jpg');
+    background-image: url('../images/bg-images/bg4.jpg');
     background-size: cover;
     color: #000;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    min-height: 100vh;
+    height: 100px;
+    padding: 0px;
+    padding-top: 0px;
+    /* Transition properties for fading out into another image */
+    -webkit-transition: background 0.5s linear;
+    -moz-transition: background 0.5s linear;
+    -ms-transition: background 0.5s linear;
+    -o-transition: background 0.5s linear;
+    transition: background 0.5s linear;
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-image: linear-gradient(to bottom right,#002f4b,#dc4225);
+        opacity: .6; 
+      }
+}
+
+.app-hero-dashboard {
+    align-items: center;
+    background-image: url('../images/dashboard.jpg');
+    background-size: cover;
+    color: #fff;
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
@@ -95,19 +143,34 @@ nav {
     font-size: 14px;
     font-weight: 300;
     letter-spacing: 2px;
+    color: white;
+}
+
+.nav-light {
+    font-family: Montserrat;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    color: white !important;
+    background-color: #222;
+}
+
+.nav-link-white {
+    color: white !important;
 }
 
 .nav-link {
-    color: black;
+    color: white;
 }
 
 a:link .navbar-brand {
-    color: black;
+    color: white;
 }
 
 .fixed-top.scrolled {
     background-color: #222 !important;
     transition: background-color 200ms linear;
+    color: #fff;
 }
 
 .section {
@@ -148,6 +211,10 @@ a:link .navbar-brand {
 #footer .brand-title {
     font-size: 2em;
     padding: 2em;
+}
+
+.brand-title-dark {
+    color: black;
 }
 
 .footer-links {
@@ -193,4 +260,81 @@ a:link .navbar-brand {
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+.filter-dark {
+    overflow: hidden;
+    position: relative;
+    color: #fff; }
+  
+  .filter-dark:before {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    content: ' ';
+    background: rgba(34, 34, 34, 0.8); }
+  
+  .filter-light {
+    overflow: hidden;
+    position: relative;
+    color: #212529; }
+  
+  .filter-light:before {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    content: ' ';
+    background: rgba(243, 243, 243, 0.75); }
+  
+  .filter-gradient {
+    overflow: hidden;
+    position: relative;
+    color: #fff; 
+}
+  
+  .filter-gradient:before {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    content: ' ';
+    background: rgba(0, 0, 0, 0.5); 
+}
+
+.dashboard-table {
+    margin-top: 2em;
+}
+
+.results-resume, .results-profile-picture {
+    background-color: #E9ECEF;
+    border-radius: 7px;
+    padding: 3em;
+    margin-top: 2em;
+}
+.results-cover-letter, .results-facebook {
+    background-color: aliceblue;
+    border-radius: 7px;
+    padding: 3em;
+    margin-top: 2em;
+}
+
+.login-box {
+    border-radius: 7px;
+    margin: 2em;
+    padding: 2em;
+    width: 100%;
+    background-color: rgba(222, 222, 222, 0.9);
+}
+
+.options-button {
+    margin: 1em;
+}
+
+.step-img {
+    width: 100%;
 }

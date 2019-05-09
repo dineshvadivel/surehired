@@ -6,6 +6,7 @@ var aws = require("aws-sdk");
 var Q = require("q");
 var chalk = require("chalk");
 
+const analysisService = require('../service/analysis.service');
 
 var Json = {
     "accessKeyId": process.env.AWS_ACCESS_KEY,
@@ -13,7 +14,6 @@ var Json = {
     "region": process.env.AWS_REGION,
     "queueUrl": process.env.AWS_QUEUEURL
 }
-
 
 aws.config.update(Json)
 // Create an instance of our SQS Client.
@@ -29,10 +29,8 @@ var sqs = new aws.SQS({
 var receiveMessage = Q.nbind(sqs.receiveMessage, sqs);
 var deleteMessage = Q.nbind(sqs.deleteMessage, sqs);
 
-
 // ---------------------------------------------------------- //
 // ---------------------------------------------------------- //
-
 
 // When pulling messages from Amazon SQS, we can open up a long-poll which will hold open
 // until a message is available, for up to 20-seconds. If no message is returned in that
@@ -74,8 +72,11 @@ var deleteMessage = Q.nbind(sqs.deleteMessage, sqs);
                             var msg = data.Messages[i]
                             var payload = JSON.parse(msg.Body)
 
-                            if (payload.type == "TEST") {
+                            if (payload.type == "START") {
                                 console.log(payload);
+                                const jobId = payload.jobId;
+
+                                analysisService.getJob(jobId);
                             }
                         }
                     }

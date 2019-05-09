@@ -11,7 +11,7 @@ const links = [
 })
 
 const Nav = (props) => (
-  <nav className="navbar navbar-inverse bg-inverse navbar-expand-md fixed-top">
+  <nav className="navbar navbar-light nav-light navbar-expand-md">
     <div className="container">
       <span className="navbar-brand">
         <Link href="/index">
@@ -31,31 +31,31 @@ const Nav = (props) => (
         <ul className="navbar-nav">
           <li className="nav-item">
             <Link href="/index">
-              <a className="nav-link">HOME</a>
+              <a className="nav-link nav-link-white">HOME</a>
             </Link>
           </li>
           <li className="nav-item">
             <Link href="/about">
-              <a className="nav-link">ABOUT</a>
+              <a className="nav-link nav-link-white">ABOUT</a>
             </Link>
           </li>
           <li className="nav-item">
             <Link href="/contact">
-              <a className="nav-link">CONTACT</a>
+              <a className="nav-link nav-link-white">CONTACT</a>
             </Link>
           </li>
           <li className="nav-item">
             <Link href="/sign-up">
-              <a className="nav-link">SIGN UP</a>
+              <a className="nav-link nav-link-white">SIGN UP</a>
             </Link>
           </li>
           <li className="nav-item">
             {props.isLoggedIn ?
               <Link href="/app/dashboard">
-                <a className="nav-link">DASHBOARD</a>
+                <a className="nav-link nav-link-white">DASHBOARD</a>
               </Link>
               : <Link href="/login">
-                <a className="nav-link">LOGIN</a>
+                <a className="nav-link nav-link-white">LOGIN</a>
               </Link>}
 
           </li>

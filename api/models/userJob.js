@@ -15,14 +15,11 @@ const socialMedia = new Schema({
 });
 
 const scores = new Schema({
-    overall: {
-        type: Number,
-    },
     segmented: {
-        resume: Number,
-        profilePicture: Number,
-        coverLetter: Number,
-        socialMedia: Number
+        resume: Schema.Types.Mixed,
+        profilePicture: Schema.Types.Mixed,
+        coverLetter: Schema.Types.Mixed,
+        socialMedia: Schema.Types.Mixed
     }
 });
 
@@ -41,7 +38,7 @@ var UserJobSchema = new Schema({
         required: true
     },
     profilePicture: {
-        type: String
+        type: Schema.Types.Mixed
     },
     coverLetter: {
         type: String
@@ -56,8 +53,11 @@ var UserJobSchema = new Schema({
     },
     scores: {
         type: scores,
+    },
+    title: {
+        type: String,
+        required: true
     }
-
 });
 
 UserJobSchema.statics = {

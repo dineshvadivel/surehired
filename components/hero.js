@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 
 const Hero = props => (
-  <div className="hero">
+  <div className="hero filter-gradient">
     <div className="text-center">
       <div className="container">
         <div className="row">

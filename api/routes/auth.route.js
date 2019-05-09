@@ -7,6 +7,7 @@ const router = express.Router();
 router.route('/').post(authController.login);
 
 router.route('/register').post(authController.register);
+router.route('/facebook').post(authController.facebookLogin);
 // router.route('/:id').patch(tileController.patch);
 // router.route('/:id').delete(tileController.delete);
 

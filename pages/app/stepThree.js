@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone'
 import Head from '../../components/head'
-import Nav from '../../components/nav'
+import Nav from '../../components/nav-dark'
 import Footer from '../../components/footer'
 import ReactLoading from 'react-loading';
 import Router from 'next/router'
+import Cookies from 'js-cookie'
 
 class App extends Component {
     constructor(props) {
@@ -12,8 +13,15 @@ class App extends Component {
         this.onDrop = this.onDrop.bind(this);
         this.state = {
             loading: false,
-            name: localStorage.getItem('name'),
-            userId: localStorage.getItem('userId')
+            name: Cookies.get('name'),
+            userId: Cookies.get('userId'),
+            jobId: Cookies.get('jobId')
+        }
+    }
+
+    componentDidMount() {
+        if (this.state.name == null || this.state.userId == null || this.state.jobId == null) {
+            Router.push('/login');
         }
     }
 
@@ -30,23 +38,34 @@ class App extends Component {
         formData.append('type', 'cover-photo');
         formData.append('userId', this.state.userId);
 
-        const rawResponse = await fetch('/api/v1/resources', {
+        fetch('/api/v1/resources', {
             method: 'POST',
             body: formData
+        }).then(results => {
+            this.setState({
+                loading: false
+            });
+            return results.json();
+        }).then(json => {
+            console.log(json);
+            // store location in db
+            fetch('/api/v1/jobs/' + this.state.jobId, {
+                method: 'PATCH',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    profilePicture: json
+                })
+            }).then(res => {
+                console.log(res);
+                res.json().then(json => {
+                    // navigate to next step
+                    Router.push('/app/stepFour');
+                });
+            });
         });
-
-        this.setState({
-            loading: false
-        });
-
-        console.log(rawResponse);
-
-        // if all good, navigate to step 3
-        if (rawResponse.status == 200) {
-            Router.push('/app/stepFour');
-        } else {
-            alert("Oops, something went wrong! :(");
-        }
     }
 
     render() {
@@ -54,8 +73,8 @@ class App extends Component {
         return (
             <div>
                 <Head title="Home" />
-                <Nav />
-                <div className="app-hero">
+                <Nav isLoggedIn={true} />
+                <div className="app-hero step-three filter-light">
                     <div className="container">
                         <div className="row step-1">
                             <div className="col-md-12">
